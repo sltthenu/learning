@@ -1,11 +1,13 @@
 name: print message
+description: "Prints a message"
 
-input:
+inputs:
   text:
-  required: true
+    description: "print message"
+    required: true
 
 runs:
   using: "composite"
   steps:
-    - runs: echo "${{ inputs.text }}"
-    shell: bash
+    - run: echo "${{ inputs.text }}"
+      shell: bash
