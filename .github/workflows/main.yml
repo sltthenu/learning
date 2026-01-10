@@ -20,6 +20,6 @@ jobs:
         with:
           text: "Hello from action 1"
       - name: Print something
-        uses : .actions/bye
+        uses : ./actions/bye
         with:
           name: "Sandun"
