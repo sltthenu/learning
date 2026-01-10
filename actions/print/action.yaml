@@ -1,0 +1,11 @@
+name: print message
+
+input:
+  text:
+  required: true
+
+runs:
+  using: "composite"
+  steps:
+    - runs: echo "${{ inputs.text }}"
+    shell: bash

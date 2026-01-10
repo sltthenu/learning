@@ -1,3 +1,29 @@
 name: "Hello Actions"
-description: "Greet someone"
-author: "octocat@github.com"
+on:
+  push:
+    branches:
+    - main
+    - master # old type
+  pull_request:
+    branches:
+    - main
+    - master # old type
+jobs:
+  build:
+  name: "Hellow world action"
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v4
+
+  # call action 1
+  - name : Print something
+    uses: ./actions/print
+    with:
+     text: "Hello from action 1"
+  
+  # Call action 2
+  - name: Print something
+    uses : .actions/bye
+    with:
+      name: "Sandun"
