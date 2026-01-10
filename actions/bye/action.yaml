@@ -1,0 +1,11 @@
+name: Say bye
+
+inputs:
+  name:
+    required: true
+
+runs:
+ using: "composite"
+ steps:
+  - run: echo "Good Bye, ${{ inputs.name }}"
+    shell: bash
