@@ -37,3 +37,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - run: echo "Build"
+
+  matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]   # Different Node.js versions
+        os: [ubuntu-latest, windows-latest]  # Different OSes
