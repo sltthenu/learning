@@ -33,3 +33,7 @@ jobs:
             -in dataset.csv.enc \
             -out dataset.csv \
             -pass pass:${{ secrets.DATASET_KEY }}
+  build_2:
+    runs-on: ubuntu-22.04
+    steps:
+    - run: echo "Build"
