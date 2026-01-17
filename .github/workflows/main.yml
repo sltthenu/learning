@@ -37,3 +37,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - run: echo "Build"
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+          node-version: ${{ matrix['node-version'] }}
