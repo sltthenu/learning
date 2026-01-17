@@ -1,3 +1,5 @@
+
+
 name: Hello Actions
 
 on:
@@ -23,3 +25,5 @@ jobs:
         uses : ./actions/bye
         with:
           name: "Sandun"
+      - name: Show run number
+        run: echo "This is workflow run number ${{ github.run_number }} {{github.run_id}} {{github.workflow}} {{github.ref}}
