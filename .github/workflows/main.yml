@@ -44,3 +44,11 @@ jobs:
       matrix:
         node-version: [14, 16, 18]   # Different Node.js versions
         os: [ubuntu-latest, windows-latest]  # Different OSes
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix['node-version'] }}
