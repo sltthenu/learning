@@ -26,4 +26,4 @@ jobs:
         with:
           name: "Sandun"
       - name: Show run number
-        run: echo "This is workflow run number ${{ github.run_number }} {{github.run_id}} {{github.workflow}} {{github.ref}}"
+        run: echo "This is workflow run number ${{ github.run_number }} ${{github.run_id}} ${{github.workflow}} ${{github.ref}}"
