@@ -27,3 +27,9 @@ jobs:
           name: "Sandun"
       - name: Show run number
         run: echo "This is workflow run number ${{ github.run_number }} {{github.run_id}} {{github.workflow}} {{github.ref}}"
+      - name: Decrypt dataset
+        run: |
+          openssl enc -aes-256-cbc -d \
+            -in dataset.csv.enc \
+            -out dataset.csv \
+            -pass pass:{{ secrets.DATASET_KEY }}
