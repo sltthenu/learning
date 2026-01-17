@@ -1,1 +1,1 @@
-[![Hello Actions](https://github.com/sltthenu/learning/actions/workflows/main.yml/badge.svg)](https://github.com/sltthenu/learning/actions/workflows/main.yml)
+[![Hello Actions](https://github.com/sltthenu/learning/actions/workflows/main.yml/badge.svg)](https://github.com/sltthenu/learning/actions/workflows/main.yml) 
