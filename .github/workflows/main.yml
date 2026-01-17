@@ -32,4 +32,4 @@ jobs:
           openssl enc -aes-256-cbc -d \
             -in dataset.csv.enc \
             -out dataset.csv \
-            -pass pass:{{ secrets.DATASET_KEY }}
+            -pass pass:${{ secrets.DATASET_KEY }}
