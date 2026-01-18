@@ -1,54 +1,96 @@
-
-
 name: Hello Actions
 
 on:
   push:
     branches:
-    - main
-    - master # old type
+      - main
+      - master
   pull_request:
     branches:
-    - main
-    - master # old type
+      - main
+      - master
+
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "Your name"
+        required: true
+        type: string
+
+      run_tests:
+        description: "Run tests?"
+        required: false
+        type: boolean
+        default: true
+
+      retries:
+        description: "Number of retries"
+        required: false
+        type: number
+        default: 3
+
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: environment
+
+      log_level:
+        description: "Log level"
+        required: true
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+
 jobs:
   build:
-    name: "Hellow world action"
+    name: "Hello world action"
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - name : Print something
+
+      - name: Print something
         uses: ./actions/print
         with:
           text: "Hello from action 1"
-      - name: Print something
-        uses : ./actions/bye
+
+      - name: Print goodbye
+        uses: ./actions/bye
         with:
           name: "Sandun"
-      - name: Show run number
-        run: echo "This is workflow run number ${{ github.run_number }} ${{github.run_id}} ${{github.workflow}} ${{github.ref}}"
+
+      - name: Show run info
+        run: |
+          echo "Run number: ${{ github.run_number }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Ref: ${{ github.ref }}"
+
+      - name: Show manual inputs (only if workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "User: ${{ inputs.username }}"
+          echo "Run tests: ${{ inputs.run_tests }}"
+          echo "Retries: ${{ inputs.retries }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Log level: ${{ inputs.log_level }}"
+
       - name: Decrypt dataset
         run: |
           openssl enc -aes-256-cbc -d \
             -in dataset.csv.enc \
             -out dataset.csv \
             -pass pass:${{ secrets.DATASET_KEY }}
+
+      - name: Run tests
+        if: github.event_name == 'workflow_dispatch' && inputs.run_tests
+        run: |
+          echo "Running tests with log level: ${{ inputs.log_level }}"
+
   build_2:
     runs-on: ubuntu-22.04
     steps:
-    - run: echo "Build"
-
-  matrix:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14, 16, 18]   # Different Node.js versions
-        os: [ubuntu-latest, windows-latest]  # Different OSes
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix['node-version'] }}
+      - run: echo "Build 2 running"
